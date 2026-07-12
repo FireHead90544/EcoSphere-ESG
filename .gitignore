@@ -1,2 +1,4 @@
 .agent/
 .claude/
+.venv/
+__pycache__

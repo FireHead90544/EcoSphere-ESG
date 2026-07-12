@@ -3,8 +3,10 @@
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { updateESGConfig } from "@/lib/actions/settings";
+import { recomputeAllScores } from "@/lib/actions/scoring";
 import { ESGConfigSchema } from "@/lib/schemas/settings";
-import { Loader2, Save, RotateCcw, Leaf, Users, Scale, Zap } from "lucide-react";
+import { Loader2, Save, RotateCcw, Leaf, Users, Scale, Zap, Calculator } from "lucide-react";
+
 import type { ESGConfig } from "@/lib/generated/prisma/client";
 
 interface Props { config: ESGConfig | null }
@@ -23,7 +25,10 @@ export function ESGConfigPanel({ config }: Props) {
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | null>(null);
   const [saved, setSaved] = useState(false);
+  const [recomputing, setRecomputing] = useState(false);
+  const [recomputed, setRecomputed] = useState(false);
   const router = useRouter();
+
 
   const total = env + social + gov;
   const isValid = total === 100;
@@ -54,6 +59,21 @@ export function ESGConfigPanel({ config }: Props) {
       if (result.success) { setSaved(true); router.refresh(); }
       else setError(result.error);
     });
+  }
+
+  async function handleRecalculate() {
+    setRecomputing(true);
+    setRecomputed(false);
+    try {
+      await recomputeAllScores();
+      setRecomputed(true);
+      router.refresh();
+      setTimeout(() => setRecomputed(false), 3000);
+    } catch (e: any) {
+      setError(e.message || "Failed to recalculate");
+    } finally {
+      setRecomputing(false);
+    }
   }
 
   const pillars = [
@@ -163,7 +183,16 @@ export function ESGConfigPanel({ config }: Props) {
         >
           <RotateCcw className="size-4" /> Reset to Defaults
         </button>
+        <button
+          onClick={handleRecalculate}
+          disabled={recomputing}
+          className="ml-auto flex items-center gap-2 rounded-2xl border border-border bg-card px-5 py-2.5 text-sm font-medium text-foreground hover:bg-accent transition-all disabled:opacity-50"
+        >
+          {recomputing ? <Loader2 className="size-4 animate-spin" /> : <Calculator className="size-4" />}
+          {recomputing ? "Recalculating…" : recomputed ? "Done ✓" : "Recalculate All Scores"}
+        </button>
       </div>
+
     </div>
   );
 }
