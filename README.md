@@ -1,6 +1,6 @@
-# EcoSphere-ESG
+# EcoSphere ESG Platform
 
-An Environmental, Social and Governance (ESG) platform built for Odoo-Hack 2026 by Team That1Bit.
+An Environmental, Social, and Governance (ESG) platform built for Odoo-Hack 2026 by Team That1Bit. EcoSphere helps organizations track and improve their sustainability, social impact, and governance practices through data-driven insights, gamification, and machine learning scoring.
 
 ## Team Members
 
@@ -21,49 +21,41 @@ The project follows a monorepo structure which will be described.
 - **Hour 4 (12:00 - 01:00 PM):** Setup Prisma, a lot of chaos, some snacks & distributing the workload.
 - **Hour 5 (01:00 - 02:00 PM):** Implemented auth, notifications, layouts & shared stuff so everyone can work parallelly afterwards.
 - **Hour 6 (02:00 - 03:00 PM):** Focus.
+- **Hour 7 (03:00 - 04:00 PM):** Started working on dedicated dashboards for each mini-dashboard. Finalized main dashboard, compliance dashboard & governance dashboards, reports.
+- **Hour 8 (04:00 - 05:00 PM):** Started working on environmental & social dashboards, added more mock data, started working on notifications, gamification,  ml infra & apis, ml model. Wrap up project :')
 
 ## Code Conventions
 
-The project follows the obvious production-level coding practices. 
+The project follows production-level coding practices:
 
-- Never push to the `main` branch directly. Always create PRs --> review --> pass ci/cd --> deploy
-- Never write garbage code, make sure tests are passing
-- Don't claim what you aren't doing. Not everything is supposed to be implemented.
-- No bullshit AI-slop or fancy-tech, just to justify using a whole bloated XYZ-infrastructure.
-- There's no bad code, only bad programmers.
-- Use your brain and omit any practice in cases you belive your actions are justified.
-- Enjoy writing code :)
+- Never push to the `main` branch directly. Always create PRs --> review --> pass ci/cd --> deploy.
+- Write robust code, ensure types are safe (`npm run typecheck` should pass).
+- Avoid unnecessary bloated infrastructure for simple features.
+- Enjoy writing code!
 
-## Local Development Setup
+## Quickstart
 
-First time on this repo? Run these commands from the `web/` directory:
-
+### 1. Start the Web App
+Navigate to the `web/` directory and refer to the [Web README](./web/README.md) for detailed setup instructions.
 ```bash
 cd web
-
-# 1. Install dependencies
 npm install
-
-# 2. Set up environment variables
 cp .env.example .env
-# Edit .env — the default values work for local dev as-is
-
-# 2.5 Generate prisma client
-npx prisma generate
-
-# 3. Create local database, apply migrations, and seed demo data
 npx prisma migrate dev
-
-# 3.5 Seed the database
 npx prisma db seed
-
-# 4. Start the dev server
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000). Login with:
-- **Admin:** `admin@ecosphere.dev` / `admin123`
-- **Employee:** `priya.sharma@ecosphere.dev` / `employee123`
+### 2. Start the ML Service
+Navigate to the `ml/` directory and refer to the [ML README](./ml/README.md).
+```bash
+cd ml
+uv run python train.py
+uv run uvicorn main:app --port 8000 --reload
+```
 
-> **Note:** Each developer has their own local `dev.db` (SQLite file, gitignored). When a teammate adds a schema migration, pull their branch and re-run `npx prisma migrate dev` to apply it.
+## Demo Credentials
 
+Open [http://localhost:3000](http://localhost:3000) and login with the seeded accounts:
+- **Admin**: `admin@ecosphere.dev` / `admin123`
+- **Employee**: `priya.sharma@ecosphere.dev` / `employee123`
