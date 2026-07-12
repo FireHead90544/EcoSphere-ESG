@@ -54,6 +54,9 @@ npx prisma generate
 # 3. Create local database, apply migrations, and seed demo data
 npx prisma migrate dev
 
+# 3.5 Seed the database
+npx prisma db seed
+
 # 4. Start the dev server
 npm run dev
 ```
