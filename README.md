@@ -17,6 +17,10 @@ The project follows a monorepo structure which will be described.
 
 - **Hour 1 (09:00 - 10:00 AM):** Analyzed the problem statement, brainstormed ideas, jot down features & mockups.
 - **Hour 2 (10:00 - 11:00 AM):** (Contd.) Assessed feature potential, implemented process-flows, naive-architectural details & finalized what exactly we're gonna build. Roles distributed. Happy Hacking Starts :)
+- **Hour 3 (11:00 - 12:00 PM):** Started scaffolding the project, setting up Next.js, React, Tailwind, Shadcn & theming the design system.
+- **Hour 4 (12:00 - 01:00 PM):** Setup Prisma, a lot of chaos, some snacks & distributing the workload.
+- **Hour 5 (01:00 - 02:00 PM):** Implemented auth, notifications, layouts & shared stuff so everyone can work parallelly afterwards.
+- **Hour 6 (02:00 - 03:00 PM):** Focus.
 
 ## Code Conventions
 
