@@ -1,4 +1,6 @@
-# EcoSphere ESG Platform
+# EcoSphere-ESG
+
+<img width="1862" height="934" alt="image" src="https://github.com/user-attachments/assets/f9b1b520-55dd-44f9-9d84-bea2ea217271" />
 
 An Environmental, Social, and Governance (ESG) platform built for Odoo-Hack 2026 by Team That1Bit. EcoSphere helps organizations track and improve their sustainability, social impact, and governance practices through data-driven insights, gamification, and machine learning scoring.
 
