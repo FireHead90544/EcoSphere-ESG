@@ -55,5 +55,10 @@ export async function proxy(request: NextRequest) {
     return NextResponse.redirect(new URL("/dashboard", nextUrl));
   }
 
-  return NextResponse.next();
+  // Forward the current pathname as a header so server components can read it
+  // (avoids needing usePathname() in layouts that are server components)
+  const requestHeaders = new Headers(request.headers);
+  requestHeaders.set("x-pathname", nextUrl.pathname);
+
+  return NextResponse.next({ request: { headers: requestHeaders } });
 }

@@ -33,3 +33,37 @@ The project follows the obvious production-level coding practices.
 - There's no bad code, only bad programmers.
 - Use your brain and omit any practice in cases you belive your actions are justified.
 - Enjoy writing code :)
+
+## Local Development Setup
+
+First time on this repo? Run these commands from the `web/` directory:
+
+```bash
+cd web
+
+# 1. Install dependencies
+npm install
+
+# 2. Set up environment variables
+cp .env.example .env
+# Edit .env — the default values work for local dev as-is
+
+# 2.5 Generate prisma client
+npx prisma generate
+
+# 3. Create local database, apply migrations, and seed demo data
+npx prisma migrate dev
+
+# 3.5 Seed the database
+npx prisma db seed
+
+# 4. Start the dev server
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000). Login with:
+- **Admin:** `admin@ecosphere.dev` / `admin123`
+- **Employee:** `priya.sharma@ecosphere.dev` / `employee123`
+
+> **Note:** Each developer has their own local `dev.db` (SQLite file, gitignored). When a teammate adds a schema migration, pull their branch and re-run `npx prisma migrate dev` to apply it.
+
